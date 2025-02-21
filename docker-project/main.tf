@@ -20,18 +20,18 @@ resource "docker_volume" "app_network" {
 }
 
 resource "docker_image" "nginx" {
-   name = "nginx:latest"
+   name = var.nginx_image
    keep_locally = true
 }
 
 resource "docker_container" "nginx" {
-   image = docker_image.nginx.name
+   image = var.nginx_image
    name  = "nginx_server"
    network_mode = docker_network.app_network.name
 
    ports {
      internal = 80
-     external = 8080
+     external = var.nginx_port
    }
 }
 
@@ -40,13 +40,13 @@ resource "docker_volume" "pg_data" {
 }
 
 resource "docker_container" "postgres" {
-   image = "postgres:15"
+   image = var.postgres_image
    name = "postgres_db"
 
    env = [
-      "POSTGRES_USER=admin",
-      "POSTGRES_PASSWORD=admin",
-      "POSGRESS_DB=mydb"
+      "POSTGRES_USER=${var.postgres_user}",
+      "POSTGRES_PASSWORD=${var.postgres_password}",
+      "POSGRESS_DB=${var.postgres_db}"
    ]
 
   network_mode = docker_network.app_network.name
@@ -58,7 +58,7 @@ resource "docker_container" "postgres" {
   
   ports {
      internal = 5432
-     external = 5432
+     external = var.postgres_port
   }
 }
  
