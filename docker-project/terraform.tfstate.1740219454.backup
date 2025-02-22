@@ -1,10 +1,32 @@
 {
   "version": 4,
   "terraform_version": "1.10.5",
-  "serial": 34,
+  "serial": 33,
   "lineage": "098dec24-bf7c-cbc5-c5c7-690a0f756a78",
   "outputs": {},
   "resources": [
+    {
+      "module": "module.database",
+      "mode": "managed",
+      "type": "docker_volume",
+      "name": "pg_data",
+      "provider": "provider[\"registry.terraform.io/terraform-provider-docker/docker\"]",
+      "instances": [
+        {
+          "schema_version": 1,
+          "attributes": {
+            "driver": "local",
+            "driver_opts": null,
+            "id": "pg_data",
+            "labels": [],
+            "mountpoint": "/var/lib/docker/volumes/pg_data/_data",
+            "name": "pg_data"
+          },
+          "sensitive_attributes": [],
+          "private": "eyJzY2hlbWFfdmVyc2lvbiI6IjEifQ=="
+        }
+      ]
+    },
     {
       "module": "module.network",
       "mode": "data",

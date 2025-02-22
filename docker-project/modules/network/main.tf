@@ -7,6 +7,6 @@ terraform {
     }
 }
 
-data "docker_network" "app_network" {
+resource "docker_network" "app_network" {
   name = "app_network"
 }
